@@ -41,8 +41,7 @@ async def root():
 
     pdf.generate_pdf("Math_test", compiler="xelatex", clean_tex=True)
 
-    # return FileResponse(path="./Math_test.pdf", media_type="application/pdf", filename="Math_test.pdf")
-    return str(random.randint(1, 10))
+    return FileResponse(path="./Math_test.pdf", media_type="application/pdf", filename="Math_test.pdf")
 
 
 
