@@ -49,9 +49,9 @@ jobs:
           python -m venv venv
           source venv/bin/activate
 
-      - name: Upgrade pip, setuptools, and wheel
-        run: pip install --upgrade pip setuptools wheel
-
+      - name: Upgrade pip and setuptools
+        run: |
+          python -m pip install --upgrade pip setuptools==61.0.0 wheel
 
       - name: Install dependencies
         run: pip install -r requirements.txt
