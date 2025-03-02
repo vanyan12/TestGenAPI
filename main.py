@@ -22,7 +22,7 @@ app.add_middleware(
 )
 
 
-@app.get("/")
+@app.get("/pdf")
 async def root():
     Sections = Data.Faculties["manual"]
 
