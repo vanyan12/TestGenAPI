@@ -7,14 +7,14 @@ Database = {
     'Section4': 49,
     'Section10': 26,
     'Section6': 23,
-    'Section5': 45,#66 task but there is not answers
+    'Section5': 45, #66 task but there is not answers
     'Section2': 73,
     'Section8': 68,
     'Section9': 23,
     '2Section8': 86,
     '2Section1': 5,#43
-    '2Section3': 10,#19
-    '2Section2': 19,
+    '2Section3': 19,#19
+    '2Section2': 10,#19
     '2Section6': 43,
     '2Section7': 29,
     '2Section4': 23,
