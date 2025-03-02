@@ -1,0 +1,9 @@
+{
+  "requirement": "",
+  "data": {
+    "1": "$a^4 + \\frac{1}{a^4}, եթե\\ a + \\frac{1}{a} = -2$",
+    "2": "$\\frac{1}{\\sqrt{2} +1}  + \\frac{1}{\\sqrt{3} + \\sqrt{2}} + \\frac{1}{\\sqrt{4} + \\sqrt{3}}$",
+    "3": "$8cos(2arcsin\\frac{1}{4})$",
+    "4": "$\\sqrt{4\\lg2\\ + lg^25\\ } + \\sqrt{4\\lg5\\ + lg^22\\ }$"
+  }
+}
