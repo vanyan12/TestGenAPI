@@ -41,7 +41,10 @@ async def root():
 
     pdf.generate_pdf("Math_test", compiler="xelatex", clean_tex=True)
 
-    return FileResponse(path="./Math_test.pdf", media_type="application/pdf", filename="Math_test.pdf")
+    # Convert relative path to absolute
+    pdf_path = os.path.abspath("./Math_test.pdf")
+
+    return FileResponse(path=pdf_path, media_type="application/pdf", filename="Math_test.pdf")
 
 
 
