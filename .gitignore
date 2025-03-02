@@ -17,10 +17,12 @@ Pipfile
 Pipfile.lock
 poetry.lock
 
-# Ignore IDE settings (optional)
+# Ignore directories or files
 .vscode/
 .idea/
 Pictures/
+pdf.py
+test.http
 
 # Ignore database files
 *.sqlite3

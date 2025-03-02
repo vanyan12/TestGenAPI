@@ -1,6 +1,5 @@
 import json
 import os
-
 from Data import Requirements
 from pylatex import Document, Command, Section
 from pylatex.utils import NoEscape
