@@ -4,9 +4,11 @@ click==8.1.8
 colorama==0.4.6
 exceptiongroup==1.2.2
 fastapi==0.115.11
+gunicorn==23.0.0
 h11==0.14.0
 idna==3.10
 ordered-set==4.1.0
+packaging==24.2
 pydantic==2.10.6
 pydantic_core==2.27.2
 PyLaTeX==1.4.2
