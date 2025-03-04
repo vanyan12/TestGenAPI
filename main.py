@@ -24,28 +24,28 @@ app.add_middleware(
 
 @app.get("/pdf")
 async def root():
-    Sections = Data.Faculties["manual"]
+    # Sections = Data.Faculties["manual"]
+    #
+    # Count = [Data.Database[sec] for sec in Sections]
+    #
+    # Randoms = [random.randint(1, Count[Sections.index(sec)]) for sec in Sections]
+    #
+    # Tasks = list(zip(Sections, Randoms))
+    #
+    # pdf = Test()
+    #
+    # for section, task_n in Tasks:
+    #     file = f"./Texts/{section}/{section}-{task_n}.json"
+    #
+    #     pdf.define_task_type(file)(file)
+    #
+    # pdf.generate_pdf("Math_test", compiler="xelatex", clean_tex=True)
+    #
+    # # Convert relative path to absolute
+    # pdf_path = os.path.abspath("./Math_test.pdf")
 
-    Count = [Data.Database[sec] for sec in Sections]
-
-    Randoms = [random.randint(1, Count[Sections.index(sec)]) for sec in Sections]
-
-    Tasks = list(zip(Sections, Randoms))
-
-    pdf = Test()
-
-    for section, task_n in Tasks:
-        file = f"./Texts/{section}/{section}-{task_n}.json"
-
-        pdf.define_task_type(file)(file)
-
-    pdf.generate_pdf("Math_test", compiler="xelatex", clean_tex=True)
-
-    # Convert relative path to absolute
-    pdf_path = os.path.abspath("./Math_test.pdf")
-
-    return FileResponse(path=pdf_path, media_type="application/pdf", filename="Math_test.pdf")
-    # return "OK"
+    # return FileResponse(path=pdf_path, media_type="application/pdf", filename="Math_test.pdf")
+    return "OK"
 
 
 
