@@ -1,0 +1,8 @@
+./.venv
+.idea
+./.github
+./Pictures
+test.http
+.gitignore
+pdf.py
+Answers.py
