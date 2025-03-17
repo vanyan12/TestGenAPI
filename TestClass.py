@@ -1,6 +1,7 @@
 import json
 import os
 from Data import Requirements
+from Answers import Answers
 from pylatex import Document, Command, Section
 from pylatex.utils import NoEscape
 
@@ -11,6 +12,7 @@ class Test(Document):
 
         # For handling correct task numering
         self.task_counter = 1
+        self.answers = {}
 
         self.preamble.append(Command("title", "Թեստ"))
         self.preamble.append(Command("date", NoEscape(r"")))
@@ -40,7 +42,6 @@ class Test(Document):
           {\thesection}{1em}
           {\parbox{\dimexpr\textwidth-2em}{\raggedright}}
         '''))
-    # @staticmethod
     def define_task_type(self, fileName):
         if os.path.basename(os.path.dirname(fileName))[0] in {"2", "3"}:
             return self.add_task

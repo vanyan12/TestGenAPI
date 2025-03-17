@@ -1,4 +1,3 @@
-import Answers
 
 Database = {
     'Section1': 37,
@@ -13,7 +12,7 @@ Database = {
     'Section9': 23,
     '2Section8': 86,
     '2Section1': 5,#43
-    '2Section3': 19,#19
+    '2Section3': 1,#19
     '2Section2': 10,#19
     '2Section6': 43,
     '2Section7': 29,
@@ -41,7 +40,7 @@ Faculties = {
             ['Section1', 'Section3', 'Section4', 'Section10', 'Section5', 'Section7',
              '2Section4', '2Section1', '3Section4', '2Section3', '2Section2', '2Section6',
              '2Section2', '3Section2']],
-    "manual": ["2Section1", "2Section3", "2Section1"],
+    "manual": ["2Section1", "2Section3", "2Section1" ],
      "add": True
 }
 
@@ -52,7 +51,7 @@ Requirements = {
     'Section4': "Լուծել անհավասարումը",
     'Section5': "",
     'Section6': "Կատարել առաջադրանքները",
-    'Section7': "",  # 66 task but there is not answers
+    'Section7': "",
     'Section8': "",
     'Section9': "",
     'Section10': "",
