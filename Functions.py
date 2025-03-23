@@ -18,4 +18,4 @@ def rename_to_json(directory):
             os.rename(txt_path, json_path)  # Rename file
 
 
-# rename_to_json("./Texts/2Section2")
+# rename_to_json("./Texts/Section10")

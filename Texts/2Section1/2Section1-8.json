@@ -1,4 +1,9 @@
-$$(a^5 + \frac{1}{a^5})\ \text{-}ը,\ եթե\ a + \frac{1}{a} = 2:$$
-$$\sqrt[12]{5}\ \cdot \sqrt[4]{5}\ : \sqrt[3]{5}:$$
-$$sin20^\circ + 2sin^235^\circ:$$
-$$10^{lg^25}\ \cdot 5^{lg2}:$$
+{
+    "requirement": "",
+    "data": {
+        "1": "$(a^5 + \\frac{1}{a^5})\\ \\text{-}$ը, եթե $a + \\frac{1}{a} = 2$",
+        "2": "$\\sqrt[12]{5}\\ \\cdot \\sqrt[4]{5}\\ : \\sqrt[3]{5}$",
+        "3": "$sin20^\\circ + 2sin^235^\\circ$",
+        "4": "$10^{lg^25}\\ \\cdot 5^{lg2}$"
+    }
+}

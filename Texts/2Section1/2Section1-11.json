@@ -1,4 +1,9 @@
-$$\sqrt{x+2\sqrt{x-1}} + \sqrt{x-2\sqrt{x-1}},\ եթե\ x \in [1,2]:$$
-$$(a+b)(b+c)(a+c) + abc,\ եթե\ a+b+c=0:$$
-$$\frac{\sqrt{6}}{sin15^\circ + cos15^\circ}:$$
-$$log_{1,5}{(3+\sqrt{6\ })^6} - log_{1,5}{(2+\sqrt{6\ })^6}:$$
+{
+    "requirement": "",
+    "data": {
+        "1": "$\\sqrt{x+2\\sqrt{x-1}} + \\sqrt{x-2\\sqrt{x-1}},$ եթե $x \\in [1,2]$",
+        "2": "$(a+b)(b+c)(a+c) + abc,$ եթե $a+b+c=0$",
+        "3": "$\\frac{\\sqrt{6}}{sin15^\\circ + cos15^\\circ}$",
+        "4": "$log_{1,5}{(3+\\sqrt{6\\ })^6} - log_{1,5}{(2+\\sqrt{6\\ })^6}$"
+    }
+}

@@ -1,6 +1,6 @@
 
 Database = {
-    'Section1': 37,
+    'Section1': 1,#37
     'Section7': 20,
     'Section3': 63,
     'Section4': 49,
@@ -11,7 +11,7 @@ Database = {
     'Section8': 68,
     'Section9': 23,
     '2Section8': 86,
-    '2Section1': 5,#43
+    '2Section1': 16,#43
     '2Section3': 1,#19
     '2Section2': 10,#19
     '2Section6': 43,
@@ -40,8 +40,8 @@ Faculties = {
             ['Section1', 'Section3', 'Section4', 'Section10', 'Section5', 'Section7',
              '2Section4', '2Section1', '3Section4', '2Section3', '2Section2', '2Section6',
              '2Section2', '3Section2']],
-    "manual": ["2Section1", "2Section3", "2Section1" ],
-     "add": True
+
+    "manual": ["2Section1", "Section1", "2Section1"]
 }
 
 Requirements = {
