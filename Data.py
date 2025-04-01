@@ -12,7 +12,7 @@ Database = {
     'Section9': 23,
     '2Section8': 86,
     '2Section1': 16,#43
-    '2Section3': 1,#19
+    '2Section3': 10,#19
     '2Section2': 10,#19
     '2Section6': 43,
     '2Section7': 29,
