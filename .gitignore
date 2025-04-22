@@ -24,6 +24,12 @@ poetry.lock
 Pictures/
 pdf.py
 test.http
+.dockerignore
+Dockerfile
+Dockerfile.base
+
 
 # Ignore database files
 *.sqlite3
+
+
