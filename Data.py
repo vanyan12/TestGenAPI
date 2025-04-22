@@ -10,14 +10,14 @@ Database = {
     'Section2': 73,
     'Section8': 68,
     'Section9': 23,
-    '2Section8': 86,
+    '2Section8': 10, #86,
     '2Section1': 16,#43
     '2Section3': 10,#19
     '2Section2': 10,#19
-    '2Section6': 43,
-    '2Section7': 29,
-    '2Section4': 23,
-    '2Section5': 35,
+    '2Section6': 10,#43,
+    '2Section7': 10, #29,
+    '2Section4': 10,#23,
+    '2Section5': 10,#35,
     '3Section1': 46,
     '3Section4': 16,
     '3Section2': 77
@@ -41,7 +41,7 @@ Faculties = {
              '2Section4', '2Section1', '3Section4', '2Section3', '2Section2', '2Section6',
              '2Section2', '3Section2']],
 
-    "manual": ["2Section1", "Section1", "2Section1"]
+    "manual": ["2Section2", "2Section3", "2Section4",  "2Section5", "2Section6", "2Section7", "2Section8"]
 }
 
 Requirements = {
@@ -60,13 +60,28 @@ Requirements = {
     '2Section3': "",
     '2Section4': "Կատարել առաջադրանքները",
     '2Section5': "",
-    '2Section6': "",
+    '2Section6': "Կատարել առաջադրանքները",
     '2Section7': "",
     '2Section8': "Կատարել առաջադրանքները",
     '3Section1': "",
     '3Section2': "",
     '3Section3': ""
 }
+
+# For helper function in TestClass.py
+four = ["Section1", "Section2", "Section3", "Section4", "Section5", "Section6", "Section7", "Section8", "Section9",
+        "Section10",
+        "2Section1", "2Section2", "2Section3", "2Section4", "2Section5", "2Section6", "2Section7"]
+
+six = ["3Section1", "3Section2", "3Section4"]
+
+options = {}
+
+for sec in four:
+    options[sec] = 4
+for sec in six:
+    options[sec] = 6
+options["2Section8"] = 2
 
 
 

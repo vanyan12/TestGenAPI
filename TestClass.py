@@ -2,9 +2,9 @@ import json
 import os
 from builtins import type
 
-from Data import Requirements
+from Data import Requirements, options
 from Answers import Answers
-from pylatex import Document, Command, Section
+from pylatex import Document, Command, Section, MiniPage
 from pylatex.utils import NoEscape
 
 
@@ -23,11 +23,15 @@ class Test(Document):
         self.preamble.append(Command("date", NoEscape(r"")))
         self.append(NoEscape(r"\maketitle"))
         self.preamble.append(NoEscape(r'\titlespacing{\title}{0pt}{0pt}{-30pt}'))  # Adjust spacing
+        self.preamble.append(NoEscape(r'\titlespacing{\section}{0pt}{0pt}{20pt}'))  # Adjust spacing
 
         self.preamble.append(NoEscape(r'\usepackage[a4paper, left=0.7in, right=0.7in, top=0.2in, bottom=0.2in]{geometry}'))
         self.preamble.append(NoEscape(r'\renewcommand{\thesection}{\Roman{section}}')) # Section numbering with I, II, III, IV ...
         self.preamble.append(NoEscape(r'\usepackage{indentfirst}'))
+        self.preamble.append(NoEscape(r'\usepackage{enumitem}'))
         self.preamble.append(NoEscape(r'\usepackage{fontspec}'))
+        self.preamble.append(NoEscape(r'\newlist{tasks}{description}{1}'))
+        self.preamble.append(NoEscape(r'\setlist[tasks]{labelindent=30pt, labelwidth=10pt, leftmargin=50pt, labelsep=10pt, font=\normalfont}'))
         self.packages.append(NoEscape(r'\usepackage{amsmath}'))
         self.preamble.append(NoEscape(r'\usepackage{polyglossia}'))
         self.packages.append(NoEscape(r'\usepackage{titlesec}'))
@@ -45,7 +49,7 @@ class Test(Document):
         \titleformat{\section}[block]
           {\normalfont\Large\bfseries}
           {\thesection}{1em}
-          {\parbox{\dimexpr\textwidth-2em}{\raggedright}}
+          {\parbox[t]{0.9\textwidth}}
         '''))
     def define_task_type(self, fileName):
         if os.path.basename(os.path.dirname(fileName))[0] in {"2", "3"}:
@@ -60,18 +64,22 @@ class Test(Document):
             # Loads data from json file, converting it to divt (list)
             Task = json.load(task)
 
-            section = os.path.basename(os.path.dirname(fileName)) # this is correct as we should give path
-
             # Loop through tasks and add to answers_input_template what type of answer requires the task
             for i in range(self.task_counter, self.task_counter + len(Task["data"])):
                 self.answers_input_template[i] = "input"
+
+            # Creating Section with corresponding text
+            section = os.path.basename(os.path.dirname(fileName))
 
             with self.create(Section(NoEscape(Requirements[section] if Task["requirement"] == "" else Task["requirement"]))):
 
                 # Adding tasks to pdf iteratively
                 for i in range(0, len(Task["data"])):
-                    self.append(NoEscape(fr"\hangindent=50pt {self.task_counter}) \hspace{{10pt}}" + Task["data"][str(i+1)]))
-                    self.append(NoEscape(r"\vspace*{5pt} \par "))
+                    self.append(NoEscape(r"\begin{tasks}"))
+                    self.append(NoEscape(fr"\item[{self.task_counter})] \parbox[t]{{0.9\textwidth}}{{ {Task['data'][str(i + 1)]}}}"))
+                    self.append(NoEscape(r"\end{tasks}"))
+                    self.append(NoEscape(r"\vspace*{7pt} \par "))
+
 
                     self.task_counter += 1
 
@@ -112,11 +120,21 @@ class Test(Document):
                     # Incrementing task_counter for correctly print next task number in document
                     self.task_counter += 1
 
+    def get_task_answer_count(self, section):
+        if section[0] == '3':
+            return 6
+        if section[0] == '2' and section[-1] == '8':
+            return 2
+        else:
+            return 4
 
 
     def get_answer(self, section, task_n):
         ans = Answers[section][task_n-1]
-        for i in range(0,4):
+
+
+
+        for i in range(0, self.get_task_answer_count(section)):
 
             if (isinstance(ans, int)):
                 self.answers[f"{self.answer_index}"] = str(ans)[i]

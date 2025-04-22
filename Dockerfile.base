@@ -1,0 +1,33 @@
+# Use the official Python 3.12 slim image as base
+FROM python:3.12-slim
+
+## Install LaTeX and necessary dependencies
+# Install TeX Live full package (includes all LaTeX packages)
+RUN apt-get update && apt-get install -y \
+    texlive-xetex \
+    texlive-latex-base \
+    texlive-latex-extra \
+    texlive-fonts-recommended \
+    texlive-fonts-extra \
+    texlive-lang-other \
+    fontconfig \
+    unixodbc \
+    unixodbc-dev \
+    gcc \
+    g++ \
+    && rm -rf /var/lib/apt/lists/*  # Clean up
+
+# Create directory for custom fonts and copy them into the container
+COPY ./Fonts/ /usr/share/fonts/truetype/custom/
+
+# Install Python dependencies (make sure you have requirements.txt in your project)
+COPY requirements.txt /tmp/
+RUN pip install --no-cache-dir -r /tmp/requirements.txt
+
+# Update font cache
+RUN fc-cache -fv
+
+# Set working directory to /app
+WORKDIR /app
+
+

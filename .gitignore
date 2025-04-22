@@ -1,5 +1,5 @@
 # Ignore Python virtual environment
-venv/
+.venv/
 env/
 
 # Ignore compiled Python files
@@ -19,6 +19,7 @@ poetry.lock
 
 # Ignore directories or files
 .vscode/
+.vs/
 .idea/
 Pictures/
 pdf.py
