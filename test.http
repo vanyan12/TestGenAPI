@@ -1,8 +1,0 @@
-
-GET http://localhost:8000/pdf
-Accept: application/json
-
-###
-
-GET http://localhost:8000/pdf/<path:filename>
-Accept: application/pdf

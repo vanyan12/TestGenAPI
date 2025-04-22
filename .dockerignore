@@ -1,8 +1,0 @@
-./.venv
-.idea
-./.github
-./Pictures
-./.vs
-test.http
-.gitignore
-pdf.py
