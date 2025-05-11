@@ -5,7 +5,7 @@ colorama==0.4.6
 exceptiongroup==1.2.2
 fastapi==0.115.11
 gunicorn==23.0.0
-h11==0.14.0
+h11==0.16.0
 idna==3.10
 itsdangerous==2.2.0
 ordered-set==4.1.0
