@@ -1,4 +1,6 @@
 import re, os
+from passlib.context import CryptContext
+
 def T_F_to_str(str):
     return "Ճիշտ" if str == "1" else "Սխալ"
 
@@ -18,4 +20,13 @@ def rename_to_json(directory):
             os.rename(txt_path, json_path)  # Rename file
 
 
-# rename_to_json("./Texts/Section10")
+# Create a context with bcrypt
+pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
+
+# Function to hash password
+def hash_password(password: str) -> str:
+    return pwd_context.hash(password)
+
+# Optional: Function to verify password
+def verify_password(plain_password: str, hashed_password: str) -> bool:
+    return pwd_context.verify(plain_password, hashed_password)
