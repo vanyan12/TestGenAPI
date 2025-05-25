@@ -41,7 +41,9 @@ Faculties = {
              '2Section4', '2Section1', '3Section4', '2Section3', '2Section2', '2Section6',
              '2Section2', '3Section2']],
 
-    "manual": ["2Section2", "2Section3", "2Section4",  "2Section5", "2Section6", "2Section7", "2Section8"]
+    "manual": ["2Section2", "2Section3", "2Section4",  "2Section5", "2Section6", "2Section7", "2Section8",
+               "2Section2", "2Section3", "2Section4",  "2Section5", "2Section6", "2Section7", "2Section8",
+               "2Section2", "2Section3", "2Section4",  "2Section5", "2Section6", "2Section7", "2Section8", "2Section8"]
 }
 
 Requirements = {
