@@ -146,15 +146,4 @@ class Test(Document):
 
         return self.answers
 
-    def check_answer(self, user_answers):
-        user_answers = json.loads(user_answers.json())
-        grade = 0
-
-        answers = user_answers["data"]
-
-        for variant in answers:
-            if answers[variant] == self.answers[variant]:
-                grade += 1
-
-        return grade
 

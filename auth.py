@@ -5,7 +5,7 @@ from fastapi.security import OAuth2PasswordBearer
 
 SECRET_KEY = "van40k"
 ALGORITHM = "HS256"
-ACCESS_TOKEN_EXPIRE_MINUTES = 30
+ACCESS_TOKEN_EXPIRE_MINUTES = 60
 
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl="login")
 
@@ -34,5 +34,6 @@ def verify_token(token: str) -> int:
 def get_current_user(token: str = Depends(oauth2_scheme)) -> int:
     try:
         return verify_token(token)
-    except Exception:
+    except Exception as e:
+        print(f"Token verification error: {e}")
         raise HTTPException(status_code=401, detail="Invalid credentials")
