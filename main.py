@@ -54,17 +54,29 @@ class PersonalData(BaseModel):
     surname: str
     email: str
     password: str
+    surveyForm: object
 
 class LoginData(BaseModel):
     email: str
     password: str
 
+@app.post("/submit-form")
+async def submit_form(request: Request):
+    try:
+        data = await request.json()
+        response = requests.post(SHEET_URL, json=data)
+        response.raise_for_status()
+        return {"status": "success"}
+    except requests.exceptions.RequestException as e:
+        print("Error:", e)
+        return JSONResponse(status_code=500, content={"status": "error", "message": str(e)})
+
 @app.post("/signup")
-async def signup(user_personal_data: PersonalData):
-    name = user_personal_data.name
-    surname = user_personal_data.surname
-    email = user_personal_data.email
-    password = user_personal_data.password
+async def signup(request_data: PersonalData):
+    name = request_data.name
+    surname = request_data.surname
+    email = request_data.email
+    password = request_data.password
 
     # Connect to the database
     connection = connect_to_db()
@@ -86,6 +98,10 @@ async def signup(user_personal_data: PersonalData):
         connection.commit()
 
         if cursor.rowcount > 0:
+
+            data = request_data.surveyForm
+            requests.post(SHEET_URL, json=data)
+
             return {"message": "User registered successfully",
                     "code": 0}
         else :
