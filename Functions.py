@@ -47,15 +47,15 @@ async def upload_to_cloud(bucket_name, file_path, destination_blob_name):
 
 
 
-def decode_token(token: str) -> int:
+def decode_token(token: str) -> dict:
     try:
         payload = jwt.decode(token, SECRET_KEY, algorithms=[ALGORITHM])
-        user_id = payload.get("sub")
+        user = payload.get("user")
 
 
-        if user_id is None:
+        if user is None:
             raise HTTPException(status_code=401, detail="User ID not found in token")
-        return int(user_id)
+        return user
 
     except JWTError as e:
         print(f"JWTError: {e}") # Remove this in production
@@ -63,7 +63,6 @@ def decode_token(token: str) -> int:
 
 def get_user_id_from_request(request: Request):
     token = request.cookies.get("access_token")
-    print(f"Token from request: {token}")  # Debugging line, remove in production
 
     if not token:
         raise HTTPException(status_code=401, detail="Authorization token missing or invalid")
@@ -82,10 +81,15 @@ def check_answer(user_answers):
     connection = connect_to_db()
     cursor = connection.cursor()
 
+    print(f"User answers: {user_answers}")  # Debugging line, remove in production
+
     # Fetch the correct answers for the test
-    cursor.execute("SELECT test_answer FROM test_scores WHERE test_url = ?", user_answers["test"])
-    result = cursor.fetchone()[0]
-    correct_answers = json.loads(result)
+    cursor.execute("SELECT test_answer FROM test_scores WHERE test_url = ?", (user_answers["test"],))
+    result = cursor.fetchone()
+    print(f"Database result: {result}")  # Debugging line, remove in production
+    if not result:
+        raise HTTPException(status_code=404, detail="Test not found")
+    correct_answers = json.loads(result[0])
 
     for variant in answers:
         if answers[variant] == correct_answers[variant]:

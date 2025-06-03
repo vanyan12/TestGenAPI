@@ -20,20 +20,3 @@ def create_access_token(data: dict, expires_delta: int = None):
     return jwt.encode(to_encode, SECRET_KEY, algorithm=ALGORITHM)
 
 
-def verify_token(token: str) -> int:
-    try:
-        payload = jwt.decode(token, SECRET_KEY, algorithms=[ALGORITHM])
-        user_id = payload.get("sub")
-        if user_id is None:
-            raise ValueError("Missing user_id in token")
-        return int(user_id)
-    except JWTError:
-        raise ValueError("Token invalid or expired")
-
-
-def get_current_user(token: str = Depends(oauth2_scheme)) -> int:
-    try:
-        return verify_token(token)
-    except Exception as e:
-        print(f"Token verification error: {e}")
-        raise HTTPException(status_code=401, detail="Invalid credentials")

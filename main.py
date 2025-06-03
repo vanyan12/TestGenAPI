@@ -2,28 +2,35 @@
 import random
 import Data
 from TestClass import Test
-from fastapi import FastAPI, Depends, HTTPException
+from fastapi import FastAPI, Depends, HTTPException, Request
 from pydantic import BaseModel
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
 from starlette.responses import FileResponse, StreamingResponse, JSONResponse
 import uuid, os, io, tempfile
 from db import connect_to_db
-from auth import create_access_token, verify_token, get_current_user
+from auth import create_access_token
 import Functions as f
 from google.cloud import storage
 import json
+from datetime import datetime, timedelta
+import requests
 
 
 os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = "../key.json"
+SHEET_URL = "https://api.sheetbest.com/sheets/40f2a1fb-714c-465a-90b1-480adc717178"
 
 app = FastAPI()
 pdf = None
 
+origins = [
+    "http://localhost:5173",
+    "https://mathtestgen.netlify.app"
+]
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:5173"],
+    allow_origins=origins,
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"]
@@ -93,10 +100,10 @@ async def signup(user_personal_data: PersonalData):
         connection.close()
 
 @app.get("/auth-check")
-async def auth_check(user_id: int = Depends(f.get_user_id_from_request)):
+async def auth_check(user: dict = Depends(f.get_user_id_from_request)):
 
     return JSONResponse(
-        content={"message": "User is authenticated", "user": user_id},
+        content={"message": "User is authenticated", "user": user},
         status_code=200
     )
 
@@ -124,9 +131,8 @@ async def login(user_personal_data: LoginData):
 
         if f.verify_password(password, hashed_password):
             # Create the access token
-            token = create_access_token(data={"sub": str(user_id), "fname": fname, "lname": lname}, expires_delta=60)
+            token = create_access_token(data={"sub": str(user_id), "user": user_dict}, expires_delta=60)
 
-            print(token)
 
             # Set the token as a cookie
             response = JSONResponse(content={"message": "Login successful", "user": user_dict}, status_code=200)
@@ -134,7 +140,7 @@ async def login(user_personal_data: LoginData):
                 key="access_token",
                 value=token,
                 httponly=True,
-                secure=False,  # !Use True production
+                secure=True,  # !Use True production
                 samesite="none",  # Adjust based on your needs
                 max_age=60 * 60,  # Token expiration in seconds
                 path="/"
@@ -153,7 +159,7 @@ async def login(user_personal_data: LoginData):
         connection.close()
 
 @app.get("/pdf")
-async def root(user_id: int = Depends(f.get_user_id_from_request)):
+async def root(user: dict = Depends(f.get_user_id_from_request)):
     Sections = Data.Faculties["manual"]
 
     Count = [Data.Database[sec] for sec in Sections]
@@ -177,7 +183,7 @@ async def root(user_id: int = Depends(f.get_user_id_from_request)):
 
     test_id = uuid.uuid4()
     bucket_name = "test-gen-pdfs"
-    destination_blob_name = f"{user_id}/{test_id}-math-test.pdf"
+    destination_blob_name = f"{user["id"]}/{test_id}-math-test.pdf"
 
     with tempfile.NamedTemporaryFile(delete=False, suffix=".pdf") as temp_file:
         temp_file_name = os.path.splitext(temp_file.name)[0]
@@ -198,7 +204,8 @@ async def root(user_id: int = Depends(f.get_user_id_from_request)):
         connection = connect_to_db()
         cursor = connection.cursor()
 
-        cursor.execute("INSERT INTO test_scores (user_id, test_url, test_answer) VALUES (?, ?, ?)",(user_id, destination_blob_name, json.dumps(pdf.answers)))
+        cursor.execute("INSERT INTO test_scores (user_id, test_url, test_answer) VALUES (?, ?, ?)",(user["id"], destination_blob_name, json.dumps(pdf.answers)))
+        cursor.execute("INSERT INTO TestGeneration (user_id, last_generated) VALUES (?, ?)", (user["id"], datetime.now()))
         connection.commit()
     except Exception as e:
         print(f"Error: {e}")
@@ -215,10 +222,10 @@ async def root(user_id: int = Depends(f.get_user_id_from_request)):
     }
 
 @app.get("/get-test/{file_name:str}")
-async def get_test(file_name: str, user_id: int = Depends(f.get_user_id_from_request)):
+async def get_test(file_name: str, user: dict = Depends(f.get_user_id_from_request)):
     try:
         bucket_name = "test-gen-pdfs"
-        blob_path = f"{user_id}/{file_name}"  # Adjust path logic as needed
+        blob_path = f"{user["id"]}/{file_name}"  # Adjust path logic as needed
 
 
         client = storage.Client()
@@ -241,6 +248,7 @@ async def get_test(file_name: str, user_id: int = Depends(f.get_user_id_from_req
 @app.post("/check")
 async def check(user_answer: Answer):
     score = f.check_answer(user_answer)
+    print(f"User answers: {user_answer}")  # Debugging line, remove in production
 
     connection = connect_to_db()
     cursor = connection.cursor()
@@ -295,6 +303,44 @@ async def get_user_tests(user_id: int, page: int = 0, page_size: int = 10):
         connection.close()
 
 
+@app.post("/logout")
+async def logout():
+    response = JSONResponse(content={"message": "Logout successful"}, status_code=200)
+    response.set_cookie(
+        key="access_token",
+        value="",
+        httponly=True,
+        secure=True,  # Use True in production
+        samesite="none",  # Adjust based on your needs
+        max_age=0,  # Expire immediately
+        path="/"
+    )
+    return response
 
+@app.get("/can-generate")
+async def can_generate(user: dict = Depends(f.get_user_id_from_request)):
+    connection = connect_to_db()
+    cursor = connection.cursor()
+
+    try:
+        cursor.execute("SELECT last_generated FROM TestGeneration WHERE user_id = ?", (user["id"],))
+        last_gen = cursor.fetchone()[0]
+
+        now = datetime.now()
+        interval = timedelta(days=1)
+
+        if now - last_gen >= interval:
+            return {"can_generate": True}
+        else:
+            return {"can_generate": False, "next_available": last_gen + interval}
+
+
+    except Exception as e:
+        print(f"Error: {e}")
+        raise HTTPException(status_code=500, detail="Internal server error")
+
+    finally:
+        cursor.close()
+        connection.close()
 
 
