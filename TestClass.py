@@ -1,6 +1,5 @@
 import json
 import os
-from builtins import type
 
 from Data import Requirements, options
 from Answers import Answers

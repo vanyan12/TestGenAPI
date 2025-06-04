@@ -1,8 +1,9 @@
-»
-
-ab+bc+ca, ph a+b+c=12, a* +b +c = 64:
-
-20-sin2a bpt sina + cosa =:
-
-‘2.x ~arccos (cos):
-2 -Iog,¢ 102 ~Tog,¢ 10):
+{
+    "requirement": "",
+    "data": {
+        "1": "$ab+bc+ca, $ եթե $a+b+c=12, a^2+b^2+c^2=64$",
+        "2": "$20 \\cdot \\sin 2\\alpha$, եթե $\\sin \\alpha + \\cos \\alpha = \\frac{\\sqrt{5}}{2}$",
+        "3": "$2\\pi - \\arccos(\\cos 5)$",
+        "4": "$(2 - \\log_\\sqrt{2} 10)(2 - \\log_\\sqrt{5} 10)$"
+    }
+}

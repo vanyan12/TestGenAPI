@@ -17,8 +17,7 @@ from datetime import datetime, timedelta
 import requests
 
 
-os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = "../key.json"
-SHEET_URL = "https://api.sheetbest.com/sheets/40f2a1fb-714c-465a-90b1-480adc717178"
+SHEET_URL = os.environ.get("SHEET_URL")
 
 app = FastAPI()
 pdf = None

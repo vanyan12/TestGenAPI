@@ -1,4 +1,9 @@
-L. a? +b +¢, bp a+b+c=12, ab+bc+ca=47:
-2. [-1=pct 5], ph x (©; 5):
-
-20". (0,25)°*'
+{
+    "requirement": "",
+    "data": {
+        "1": "$a^2 + b^2 + c^2,$ եթե $a+b+c=12, ab+bc+ca=47$",
+        "2": "$|x - 7| - |x + 5|$, եթե $x \\in (-\\infty, -5)$\n",
+        "3": "$\\frac{16}{\\pi} \\cdot \\arctan \\left(\\tan\\left(\\frac{9\\pi}{8}\\right)\\right)$\n",
+        "4": "$20^{3\\log_5 2} \\cdot (0.25)^{\\log_5 8}$\n"
+    }
+}
