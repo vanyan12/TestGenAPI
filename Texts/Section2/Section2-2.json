@@ -1,20 +1,21 @@
-Pe
-
-a+1
-
-1. SL zag '"bղ a=0,1:
-
-6 2) 11 312 4y20
-2. (6-2) H2(V5 3):
-
-215 DIB-1 313 4) 15
-3, sin cos E + 4cosZ-sin 5;
-
-5 3
-
-yo 21 32 45
-
-4, 08:8 +10,
-
-210g, 2+
-1) log,12 D1 32 4) log, 2
+{
+    "requirement": "",
+    "data": {
+        "1": {
+            "question": "$\\frac{4a^2-1}{2a+1} \\cdot \\frac{a+1}{2a^2-a},$ որտեղ $a=0,1$:",
+            "chooses": "$1)\\ 6 \\hfill 2)\\ 11 \\hfill  3)\\ 12 \\hfill  4)\\ 20 \\hfill$"
+        },
+        "2": {
+            "question": "$(3\\sqrt{5}-2)^2+12(\\sqrt{5}-3)$:",
+            "chooses": "$1)\\ 21\\sqrt{5} \\hfill 2)\\ 3\\sqrt{5}-1 \\hfill  3)\\ 13 \\hfill  4)\\ 15 \\hfill$"
+        },
+        "3": {
+            "question": "$\\sin \\pi \\cdot \\cos \\frac{\\pi}{5} + 4\\cos \\frac{\\pi}{3} \\cdot\\sin\\frac{5\\pi}{2}$:",
+            "chooses": "$1)\\ 0 \\hfill 2)\\ 1 \\hfill  3)\\ 2 \\hfill  4)\\ 5 \\hfill$"
+        },
+        "4": {
+            "question": "$\\frac{\\log_3 8 + \\log_318}{2\\log_3 2+1}$:",
+            "chooses": "$1)\\ \\log_3 12 \\hfill 2)\\ 1 \\hfill  3)\\ 2 \\hfill  4)\\ \\log_3 2$ \\hfill"
+        }
+    }
+}

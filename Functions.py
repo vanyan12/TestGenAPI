@@ -1,10 +1,13 @@
-import re, os
+import re, os, random
 from passlib.context import CryptContext
 from google.cloud import storage
 from fastapi import Request, HTTPException
 from jose import JWTError, jwt
 import json
 from db import connect_to_db
+from collections import defaultdict
+from TestClass import Test
+from Data import Database as Data
 
 
 pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
@@ -44,7 +47,6 @@ async def upload_to_cloud(bucket_name, file_path, destination_blob_name):
     blob = bucket.blob(destination_blob_name)
 
     blob.upload_from_filename(file_path, content_type='application/pdf')
-
 
 
 def decode_token(token: str) -> dict:
@@ -103,3 +105,68 @@ def check_answer(user_answers):
     connection.close()
 
     return grade
+
+
+def generate_unique_randoms(sections, counts):
+    used_values = defaultdict(set)
+    randoms = []
+
+    for section, count in zip(sections, counts):
+        # Try to generate a unique random number for this section
+        while True:
+            r = random.randint(1, count)
+            if r not in used_values[section]:
+                used_values[section].add(r)
+                randoms.append(r)
+                break
+
+
+    return randoms
+
+
+def add_section_to_pdf_and_log_errors(section_name):
+
+    log_file = 'error_log.txt'
+    base_path = './Texts'
+    pdf = Test()
+
+    # Clear or create the log file
+    if os.path.exists(log_file):
+        os.remove(log_file)
+
+    # Ensure the section exists in our database
+    if section_name not in Data:
+        raise ValueError(f"Section '{section_name}' not found in Data.")
+
+    task_count = Data[section_name]
+    error_files = []
+
+    # Loop over the tasks in the section
+    for task_num in range(1, task_count + 1):
+        file_path = f'{base_path}/{section_name}/{section_name}-{task_num}.json'
+        try:
+            if os.path.exists(file_path):
+                pdf.define_task_type(file_path)(file_path)
+            else:
+                raise FileNotFoundError(f"File not found: {file_path}")
+        except Exception as e:
+            error_files.append(file_path)
+            with open(log_file, 'a', encoding='utf-8') as log:
+                log.write(f"Error in file: {file_path}\nError: {str(e)}\n\n")
+
+    # Generate the PDF
+    try:
+        pdf.generate_pdf('./test', compiler='xelatex', clean_tex=True)
+    except Exception as e:
+        with open(log_file, 'a', encoding='utf-8') as log:
+            log.write("Error during PDF generation:\n")
+            log.write(f"Error: {str(e)}\n")
+            if error_files:
+                log.write("Files that caused errors:\n")
+                for file in error_files:
+                    log.write(f"- {file}\n")
+            log.write("\n")
+
+
+add_section_to_pdf_and_log_errors("Section10")
+

@@ -1,20 +1,21 @@
-1, © 45a aS nb d= {TB IB, b= TF + ZF:
-
-ab bP
-19,6 29 37
-
-2 BB,
-
-DN 25 3 52
-3. cos +c0s20—cos3c,nրտեղ «= 45°:
-10 2) 2 3) է
-4. 1925 Ug 4B +1g120:
-D3 2)2,5 3)2
-
-4s
-
-4)10
-
-yt
-
-18
+{
+    "requirement": "",
+    "data": {
+        "1": {
+            "question": "$\\frac{a^3+5a^2}{ab} : \\frac{a+5}{b^2},$ որտեղ $a=\\sqrt{7,3}-\\sqrt{2,3}, b=\\sqrt{7,3}+\\sqrt{2,3}$",
+            "chooses": "$1)\\ 9,6 \\hfill 2)\\ 9 \\hfill  3)\\ 7 \\hfill  4)\\ 5 \\hfill$"
+        },
+        "2": {
+            "question": "$\\frac{\\sqrt[3]{250}\\cdot\\sqrt{8}}{\\sqrt[3]{16}\\cdot\\sqrt{2\\ }}:$",
+            "chooses": "$1)\\ 2\\sqrt{2} \\hfill 2)\\ 5 \\hfill  3)\\ 5\\sqrt{2} \\hfill  4)\\ 10 \\hfill$"
+        },
+        "3": {
+            "question": "$\\cos \\alpha + \\cos 2\\alpha - \\cos 3\\alpha,$ որտեղ $\\alpha=45^\\circ:$",
+            "chooses": "$1)\\ 0 \\hfill 2)\\ \\sqrt{2} \\hfill  3)\\ 1 \\hfill  4)\\ -1 \\hfill$"
+        },
+        "4": {
+            "question": "$\\lg 25 - 2\\lg{\\sqrt{3}} + \\lg 120:$",
+            "chooses": "$1)\\ 3 \\hfill 2)\\ 2,5 \\hfill  3)\\ 1 \\hfill  4)\\ 1,8 \\hfill$"
+        }
+    }
+}

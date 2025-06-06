@@ -1,12 +1,21 @@
-1. 2(x+1)> x(x +1):
-DE=-DU@) 2D (-k2)  B(2) Hk
-
-2. (logy; 2)-(3x-6)=0:
-
-D (2) 2D (2]  D[2 +) 4 (2 te)
-3, tc;
-
-D (e+e) 2D [0; +) 3B (0) 4) (0; +)
-4. SY < 25:
-
-1) (©; 9] 2) (=; 9) ) (0; 9) 4) [0;9)
+{
+    "requirement": "",
+    "data": {
+        "1": {
+            "question": "$2(x+1) > x(x+1):$",
+            "chooses": "$1)\\ (-\\infty;-1) \\cup (2;+\\infty) \\hfill 2)\\ (-1;2) \\hfill  3)\\ (-\\infty;2) \\hfill  4)\\ [-1;2] \\hfill$"
+        },
+        "2": {
+            "question": "$(\\log_{0,5}2 \\cdot (3x-6) \\ge 0:$",
+            "chooses": "$1)\\ (-\\infty;2) \\hfill 2)\\ (-\\infty;2] \\hfill  3)\\ [2; +\\infty) \\hfill  4)\\ (2; +\\infty) \\hfill$"
+        },
+        "3": {
+            "question": "$\\frac{2x-1}{x} \\le 2:$",
+            "chooses": "$1)\\ (-\\infty;+\\infty) \\hfill 2)\\ [0;+\\infty) \\hfill  3)\\ (-\\infty;0) \\hfill  4)\\ (0;+\\infty) \\hfill$"
+        },
+        "4": {
+            "question": "$5^{\\sqrt{x}-1} < 25:$",
+            "chooses": "$1)\\ (-\\infty; 9] \\hfill 2)\\ (-\\infty;9) \\hfill  3)\\ (0;9) \\hfill  4)\\ [0;9) \\hfill$"
+        }
+    }
+}

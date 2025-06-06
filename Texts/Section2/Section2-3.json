@@ -1,20 +1,21 @@
-3) 10
-
-որտեղ «= 32:
-3+a%
-
-nt 22 31
-3. cos42" sin 48" +sin 42° cos 48°:
-yo 20,5 3
-
-4. Slog, 5 +4
-
-121 2) 26 3)34
-
-48
-
-416
-
-41
-
-4y28
+{
+    "requirement": "",
+    "data": {
+        "1": {
+            "question": "$\\frac{(a+b)^2-(a-b)^2}{4a^2b^2},$ որտեղ $a=\\frac{2}{5}, b=\\frac{1}{8}$:",
+            "chooses": "$1)\\ 20 \\hfill 2)\\ 15 \\hfill  3)\\ 10 \\hfill  4)\\ 8 \\hfill$"
+        },
+        "2": {
+            "question": "$\\frac{9-a^{\\frac{2}{5}}}{3+a^{\\frac{1}{5}}},$ որտեղ $a=32$:",
+            "chooses": "$1)\\ -1 \\hfill 2)\\ -2 \\hfill  3)\\ 1 \\hfill  4)\\ 16 \\hfill$"
+        },
+        "3": {
+            "question": "$\\cos42^\\circ \\sin48^\\circ+\\sin42^\\circ\\cos48^\\circ$:",
+            "chooses": "$1)\\ 0 \\hfill 2)\\ 0,5 \\hfill  3)\\ \\frac{\\sqrt{2}}{2} \\hfill  4)\\ 1 \\hfill$"
+        },
+        "4": {
+            "question": "$3\\log_{125}{5}+4^{\\log_2 5}:$",
+            "chooses": "$1)\\ 21 \\hfill 2)\\ 26 \\hfill  3)\\ 34 \\hfill  4)\\ 28 \\hfill$"
+        }
+    }
+}

@@ -1,16 +1,21 @@
-. -1s2:
-
-1) (-;3] 2) [-2:2] BI-E3] 4) (oo; +0)
-
-fF 6x > 4:
-
-D (re: -2) (8: +0) 2) (0) O[6; +0)
-
-3) (& +) 4 (= 3-5] 3+ 5; +e)
-gm gen,
-
-1 (=; 6] 2) [ 6] 3) (;8] 4) (©; 2]
-
-log,(7—-x)=0:
-
-1) (2; 6] DTD [67 4640)
+{
+    "requirement": "",
+    "data": {
+        "1": {
+            "question": "$|x-1| \\le 2:$",
+            "chooses": "$1)\\ (-\\infty;3] \\hfill 2)\\ [-2;2] \\hfill  3)\\ [-1;3] \\hfill  4)\\ (-\\infty; + \\infty) \\hfill$"
+        },
+        "2": {
+            "question": "$\\sqrt{x^2-6x\\ } > 4:$",
+            "chooses": "$1)\\ (-\\infty; -2) \\cup (8; +\\infty) \\hfill 2)\\ (-\\infty; 0] \\cup [6; +\\infty) \\hfill  3)\\ (4; +\\infty) \\hfill  4)\\ (-\\infty; 3-\\sqrt{13}] \\cup [3+\\sqrt{13}; +\\infty) \\hfill$"
+        },
+        "3": {
+            "question": "$2^{7(x-2)} \\le 8^{2(x-1)}:$",
+            "chooses": "$1)\\ (-\\infty; 6] \\hfill 2)\\ [1;6] \\hfill  3)\\ (-\\infty;8] \\hfill  4)\\ (-\\infty; 2] \\hfill$"
+        },
+        "4": {
+            "question": "$\\log_5{(7-x)} \\le 0:$",
+            "chooses": "$1)\\ (-\\infty; 6] \\hfill 2)\\ (-\\infty; 7) \\hfill  3)\\ [6;7)  \\hfill  4)\\ [6; +\\infty) \\hfill$"
+        }
+    }
+}

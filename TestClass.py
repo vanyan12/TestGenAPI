@@ -29,6 +29,7 @@ class Test(Document):
         self.preamble.append(NoEscape(r'\usepackage{indentfirst}'))
         self.preamble.append(NoEscape(r'\usepackage{enumitem}'))
         self.preamble.append(NoEscape(r'\usepackage{fontspec}'))
+        self.preamble.append(NoEscape(r'\usepackage{amssymb}'))
         self.preamble.append(NoEscape(r'\newlist{tasks}{description}{1}'))
         self.preamble.append(NoEscape(r'\setlist[tasks]{labelindent=30pt, labelwidth=10pt, leftmargin=50pt, labelsep=10pt, font=\normalfont}'))
         self.packages.append(NoEscape(r'\usepackage{amsmath}'))
@@ -60,8 +61,10 @@ class Test(Document):
 
         with open(fileName, "r", encoding="UTF-8") as task:
 
-            # Loads data from json file, converting it to divt (list)
+
+            # Loads data from json file, converting it to dict (list)
             Task = json.load(task)
+
 
             # Loop through tasks and add to answers_input_template what type of answer requires the task
             for i in range(self.task_counter, self.task_counter + len(Task["data"])):
@@ -87,8 +90,10 @@ class Test(Document):
 
         with open(fileName, "r", encoding="UTF-8") as task:
 
+
             # Loads data from json file, converting it to dict (list)
             Task = json.load(task)
+
 
             # Extracting section from file path
             section = os.path.basename(os.path.dirname(fileName)) # this is correct as we should give path
@@ -99,7 +104,7 @@ class Test(Document):
 
 
             # Creating Section with corresponding text
-            with self.create(Section(Requirements[section] if Task["requirement"] == "" else Task["requirement"])):
+            with self.create(Section(NoEscape(Requirements[section] if Task["requirement"] == "" else Task["requirement"]))):
 
                 # Loop through tasks data and iteratively adding tasks to the document
                 for i in range(0, len(Task["data"])):

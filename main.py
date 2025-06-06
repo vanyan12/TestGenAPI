@@ -2,7 +2,7 @@
 import random
 import Data
 from TestClass import Test
-from fastapi import FastAPI, Depends, HTTPException, Request
+from fastapi import FastAPI, Depends, HTTPException, Request, Query
 from pydantic import BaseModel
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
@@ -16,8 +16,8 @@ import json
 from datetime import datetime, timedelta
 import requests
 
-
-SHEET_URL = os.environ.get("SHEET_URL")
+os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = "../key.json"
+SHEET_URL = "https://api.sheetbest.com/sheets/40f2a1fb-714c-465a-90b1-480adc717178"
 
 app = FastAPI()
 pdf = None
@@ -35,7 +35,6 @@ app.add_middleware(
     allow_headers=["*"]
 )
 
-app.mount("/pdfs", StaticFiles(directory="./Tests"), name="pdfs")
 
 class User(BaseModel):
     id: int
@@ -174,12 +173,14 @@ async def login(user_personal_data: LoginData):
         connection.close()
 
 @app.get("/pdf")
-async def root(user: dict = Depends(f.get_user_id_from_request)):
-    Sections = Data.Faculties["manual"]
+async def root(
+        user: dict = Depends(f.get_user_id_from_request),
+        test_task_count: int = Query()):
 
+    Sections = Data.Faculties["IMA"][random.randint(0, len(Data.Faculties["IMA"]) - 1)] if test_task_count == 80 else Data.Faculties["KFM"][random.randint(0, len(Data.Faculties["KFM"]) - 1)]
     Count = [Data.Database[sec] for sec in Sections]
 
-    Randoms = [random.randint(1, Count[Sections.index(sec)]) for sec in Sections]
+    Randoms = f.generate_unique_randoms(Sections, Count)
 
     Tasks = list(zip(Sections, Randoms))
     print(Tasks)
@@ -190,8 +191,10 @@ async def root(user: dict = Depends(f.get_user_id_from_request)):
     for section, task_n in Tasks:
         file = f"./Texts/{section}/{section}-{task_n}.json"
 
-        pdf.define_task_type(file)(file)
-
+        try:
+            pdf.define_task_type(file)(file)
+        except Exception as e:
+            print("Error in file:", file, e)
         pdf.get_answer(section, task_n)
 
     print(pdf.answers)
@@ -291,12 +294,9 @@ async def get_user_tests(user_id: int, page: int = 0, page_size: int = 10):
             SELECT test_url, test_date, score 
             FROM test_scores WHERE user_id = ?
             ORDER BY test_date 
-            OFFSET ? ROWS
-            FETCH NEXT ? ROWS ONLY
         """
 
-        params = (user_id, page * page_size, page_size)
-        cursor.execute(sql_command, params)
+        params = user_id
         tests = cursor.fetchall()
 
         # Convert the results to a list of dictionaries

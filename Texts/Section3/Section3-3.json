@@ -1,29 +1,21 @@
-Do
-. Vx 31
-
-vo
-
-log, (3x-29)=2:
-D-IL I
-
-2)-1u1
-32
-
-2 32
-OE
-
-210
-
-3-1; 10
-
-36
-
-326
-
-23
-7
-41
-
-4)-6
-
-ayo
+{
+    "requirement": "",
+    "data": {
+        "1": {
+            "question": "$\\frac{7(x-3)}{x-1} = 2:$",
+            "chooses": "$1)\\ \\frac{41}{13} \\hfill 2)\\ -\\frac{19}{5} \\hfill  3)\\ \\frac{19}{5} \\hfill  4)\\ \\frac{23}{7} \\hfill$"
+        },
+        "2": {
+            "question": "$x^3=x:$",
+            "chooses": "$1)\\ 0 \\hfill 2)\\ -1, 1 \\hfill  3)\\ -1, 1, 0 \\hfill  4)\\ 1 \\hfill$"
+        },
+        "3": {
+            "question": "$\\sqrt[3]{5x-31\\ } = -1:$",
+            "chooses": "$1)\\ \\varnothing \\hfill 2)\\ \\frac{32}{5} \\hfill  3)\\ 6 \\hfill  4)\\ -6 \\hfill$"
+        },
+        "4": {
+            "question": "$\\log_7{(3x-29)} = 2:$",
+            "chooses": "$1)\\ -1,1 \\hfill 2)\\ 10 \\hfill  3)\\ 26 \\hfill  4)\\ 0 \\hfill$"
+        }
+    }
+}
