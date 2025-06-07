@@ -52,12 +52,15 @@ class Test(Document):
           {\parbox[t]{0.9\textwidth}}
         '''))
     def define_task_type(self, fileName):
-        if os.path.basename(os.path.dirname(fileName))[0] in {"2", "3"}:
+        file_name_starts_with = os.path.basename(os.path.dirname(fileName))[0]
+        if file_name_starts_with == "2":
             return self.add_task
-        return self.add_choose_task
+        elif file_name_starts_with == "3":
+            return self.add_tf_task
+        else:
+            return self.add_choose_task
 
     def add_task(self, fileName):
-        self.answers_input_template[self.answer_index] = "input"
 
         with open(fileName, "r", encoding="UTF-8") as task:
 
@@ -85,8 +88,35 @@ class Test(Document):
 
                     self.task_counter += 1
 
+    def add_tf_task(self, fileName):
+
+        with open(fileName, "r", encoding="UTF-8") as task:
+
+
+            # Loads data from json file, converting it to dict (list)
+            Task = json.load(task)
+
+
+            # Loop through tasks and add to answers_input_template what type of answer requires the task
+            for i in range(self.task_counter, self.task_counter + len(Task["data"])):
+                self.answers_input_template[i] = "tf"
+
+            # Creating Section with corresponding text
+            section = os.path.basename(os.path.dirname(fileName))
+
+            with self.create(Section(NoEscape(Requirements[section] if Task["requirement"] == "" else Task["requirement"]))):
+
+                # Adding tasks to pdf iteratively
+                for i in range(0, len(Task["data"])):
+                    self.append(NoEscape(r"\begin{tasks}"))
+                    self.append(NoEscape(fr"\item[{self.task_counter})] \parbox[t]{{0.9\textwidth}}{{ {Task['data'][str(i + 1)]}}}"))
+                    self.append(NoEscape(r"\end{tasks}"))
+                    self.append(NoEscape(r"\vspace*{7pt} \par "))
+
+
+                    self.task_counter += 1
+
     def add_choose_task(self, fileName):
-        self.answers_input_template[self.answer_index] = "choose"
 
         with open(fileName, "r", encoding="UTF-8") as task:
 
@@ -123,6 +153,7 @@ class Test(Document):
 
                     # Incrementing task_counter for correctly print next task number in document
                     self.task_counter += 1
+
 
     def get_task_answer_count(self, section):
         if section[0] == '3':

@@ -43,9 +43,14 @@ class User(BaseModel):
     email: str
     created_at: str
 
-class Answer(BaseModel):
+class UserAnswer(BaseModel):
     data: dict[str, str | None]
     test: str
+
+class AnswerSheet(BaseModel):
+    user_answer: UserAnswer
+    test_max_score: int
+
 
 class PersonalData(BaseModel):
     name: str
@@ -175,9 +180,9 @@ async def login(user_personal_data: LoginData):
 @app.get("/pdf")
 async def root(
         user: dict = Depends(f.get_user_id_from_request),
-        test_task_count: int = Query()):
+        test_max_score: int = Query()):
 
-    Sections = Data.Faculties["IMA"][random.randint(0, len(Data.Faculties["IMA"]) - 1)] if test_task_count == 80 else Data.Faculties["KFM"][random.randint(0, len(Data.Faculties["KFM"]) - 1)]
+    Sections = Data.Faculties["IMA"][random.randint(0, len(Data.Faculties["IMA"]) - 1)] if test_max_score == 120 else Data.Faculties["KFM"][random.randint(0, len(Data.Faculties["KFM"]) - 1)]
     Count = [Data.Database[sec] for sec in Sections]
 
     Randoms = f.generate_unique_randoms(Sections, Count)
@@ -191,10 +196,8 @@ async def root(
     for section, task_n in Tasks:
         file = f"./Texts/{section}/{section}-{task_n}.json"
 
-        try:
-            pdf.define_task_type(file)(file)
-        except Exception as e:
-            print("Error in file:", file, e)
+        pdf.define_task_type(file)(file)
+
         pdf.get_answer(section, task_n)
 
     print(pdf.answers)
@@ -231,6 +234,8 @@ async def root(
         cursor.close()
         connection.close()
 
+    print("Pdf answers template", pdf.answers_input_template)
+
 
     return {
         "task-count": pdf.task_counter-1,
@@ -264,16 +269,15 @@ async def get_test(file_name: str, user: dict = Depends(f.get_user_id_from_reque
         raise HTTPException(status_code=500, detail=str(e))
 
 @app.post("/check")
-async def check(user_answer: Answer):
-    score = f.check_answer(user_answer)
-    print(f"User answers: {user_answer}")  # Debugging line, remove in production
+async def check(answer_sheet: AnswerSheet):
+    score = f.check_answer(answer_sheet.user_answer, answer_sheet.test_max_score)
 
     connection = connect_to_db()
     cursor = connection.cursor()
 
     try:
     # Insert the new user into the database
-        cursor.execute("UPDATE test_scores SET score = ? WHERE test_url = ?", (score, user_answer.test))
+        cursor.execute("UPDATE test_scores SET score = ? WHERE test_url = ?", (score, answer_sheet.user_answer.test))
         connection.commit()
     except Exception as e:
         print(f"Error: {e}")
@@ -297,6 +301,7 @@ async def get_user_tests(user_id: int, page: int = 0, page_size: int = 10):
         """
 
         params = user_id
+        cursor.execute(sql_command, params)
         tests = cursor.fetchall()
 
         # Convert the results to a list of dictionaries

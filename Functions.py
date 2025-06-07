@@ -73,7 +73,7 @@ def get_user_id_from_request(request: Request):
 
 
 
-def check_answer(user_answers):
+def check_answer(user_answers, test_max_score):
     user_answers = json.loads(user_answers.json())
     grade = 0
 
@@ -88,14 +88,16 @@ def check_answer(user_answers):
     # Fetch the correct answers for the test
     cursor.execute("SELECT test_answer FROM test_scores WHERE test_url = ?", (user_answers["test"],))
     result = cursor.fetchone()
+
     print(f"Database result: {result}")  # Debugging line, remove in production
+
     if not result:
         raise HTTPException(status_code=404, detail="Test not found")
     correct_answers = json.loads(result[0])
 
     for variant in answers:
         if answers[variant] == correct_answers[variant]:
-            grade += 1
+            grade += 1.5 if (test_max_score == 120 or (test_max_score == 100 and int(variant) > 10)) else 1
 
     # Update the score in the database
     cursor.execute("UPDATE test_scores SET score = ? WHERE test_url = ?", (grade, user_answers["test"]))
@@ -168,5 +170,5 @@ def add_section_to_pdf_and_log_errors(section_name):
             log.write("\n")
 
 
-add_section_to_pdf_and_log_errors("Section10")
+add_section_to_pdf_and_log_errors("2Section3")
 
