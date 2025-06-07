@@ -50,6 +50,7 @@ class UserAnswer(BaseModel):
 class AnswerSheet(BaseModel):
     user_answer: UserAnswer
     test_max_score: int
+    test_template: dict[str, str]
 
 
 class PersonalData(BaseModel):
@@ -270,7 +271,7 @@ async def get_test(file_name: str, user: dict = Depends(f.get_user_id_from_reque
 
 @app.post("/check")
 async def check(answer_sheet: AnswerSheet):
-    score = f.check_answer(answer_sheet.user_answer, answer_sheet.test_max_score)
+    score = f.check_answer(answer_sheet.user_answer, answer_sheet.test_max_score, answer_sheet.test_template)
 
     connection = connect_to_db()
     cursor = connection.cursor()

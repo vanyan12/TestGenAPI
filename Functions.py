@@ -73,9 +73,11 @@ def get_user_id_from_request(request: Request):
 
 
 
-def check_answer(user_answers, test_max_score):
+def check_answer(user_answers, test_max_score, test_template):
     user_answers = json.loads(user_answers.json())
     grade = 0
+    true_false_score = 0
+    TF_remaining_questions = 6
 
     answers = user_answers["data"]
 
@@ -83,21 +85,66 @@ def check_answer(user_answers, test_max_score):
     connection = connect_to_db()
     cursor = connection.cursor()
 
-    print(f"User answers: {user_answers}")  # Debugging line, remove in production
 
     # Fetch the correct answers for the test
     cursor.execute("SELECT test_answer FROM test_scores WHERE test_url = ?", (user_answers["test"],))
     result = cursor.fetchone()
 
-    print(f"Database result: {result}")  # Debugging line, remove in production
 
     if not result:
         raise HTTPException(status_code=404, detail="Test not found")
     correct_answers = json.loads(result[0])
 
     for variant in answers:
-        if answers[variant] == correct_answers[variant]:
-            grade += 1.5 if (test_max_score == 120 or (test_max_score == 100 and int(variant) > 10)) else 1
+        user_answer = answers[variant]
+        correct_answer = correct_answers[variant]
+        question_type = test_template[variant]
+
+        if test_max_score == 120:
+            if user_answer == correct_answer: # Correct answer
+                if question_type == "tf":
+                    true_false_score += 1.5
+                    TF_remaining_questions -= 1
+                elif question_type in ["choose", "input"]:
+                    grade += 1.5
+            elif question_type == "tf":
+                if user_answer == "-1": # Unanswered question
+                    TF_remaining_questions -= 1
+                else: # Wrong answer for true/false question
+                    true_false_score -= 1.5
+                    TF_remaining_questions -= 1
+
+        else: # For tests with max score 100
+            question_num = int(variant)
+            if user_answer == correct_answer: # Correct answer
+                if question_num <= 10:
+                    if question_type == "tf":
+                        true_false_score += 1
+                        TF_remaining_questions -= 1
+                    else:
+                        grade += 1
+                else:
+                    if question_type == "tf":
+                        true_false_score += 1.5
+                        TF_remaining_questions -= 1
+                    else:
+                        grade += 1.5
+            elif question_type == "tf": # Wrong answer for true/false question
+                if user_answer == "-1": # Unanswered question
+                    TF_remaining_questions -= 1
+                else:
+                    true_false_score -= (1 if question_num <= 10 else 1.5)
+                    TF_remaining_questions -= 1
+
+        # After finishing the true/false block
+        if TF_remaining_questions == 0:
+            if true_false_score > 0:
+                grade += true_false_score
+            true_false_score = 0
+            TF_remaining_questions = 6
+
+
+
 
     # Update the score in the database
     cursor.execute("UPDATE test_scores SET score = ? WHERE test_url = ?", (grade, user_answers["test"]))
