@@ -1,13 +1,21 @@
-1. (4-x)(x° +4)=0:
-
-D(=-4] D4) D444] d(x 4]
-2. p05:
-
-1) (co 11] D6 +w) 3 [L11) Ց) [11]
-3. fx 21 <3:
-
-(12 »(2:0) »[&:e] (#12)
-
-IY &
-4(;) >
-D 3] DB +e) D3) 4) 6 +)
+{
+    "requirement": "",
+    "data": {
+        "1": {
+            "question": "$(4-x)(x^2+4) \\ge 0$",
+            "chooses": "$1)\\ (-\\infty;-4] \\hfill 2)\\ (-\\infty;4) \\hfill  3)\\ (-4;4] \\hfill  4)\\ (-\\infty; 4] \\hfill$"
+        },
+        "2": {
+            "question": "$|x-6| \\le 5$",
+            "chooses": "$1)\\ (-\\infty;11] \\hfill 2)\\ [6; +\\infty) \\hfill  3)\\ [1; 11) \\hfill  4)\\ [1; 11] \\hfill$"
+        },
+        "3": {
+            "question": "$\\sqrt[3]{4x-21} \\le 3$",
+            "chooses": "$1)\\ (-\\infty;12] \\hfill 2)\\ (\\frac{21}{4}; 12) \\hfill  3)\\ [\\frac{21}{4};12] \\hfill  4)\\ (-\\infty; 12) \\hfill$"
+        },
+        "4": {
+            "question": "$(\\frac{1}{2}^{x-2,5} > \\frac{\\sqrt{2}}{2}$",
+            "chooses": "$1)\\ (-\\infty; 3] \\hfill 2)\\ [3; +\\infty) \\hfill  3)\\ (-\\infty; 3) \\hfill  4)\\ (3; +\\infty) \\hfill$"
+        }
+    }
+}

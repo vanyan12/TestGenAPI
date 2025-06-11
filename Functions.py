@@ -217,5 +217,5 @@ def add_section_to_pdf_and_log_errors(section_name):
             log.write("\n")
 
 
-add_section_to_pdf_and_log_errors("2Section3")
+add_section_to_pdf_and_log_errors("Section8")
 

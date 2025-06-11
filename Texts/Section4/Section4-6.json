@@ -1,11 +1,21 @@
-» (=: 1) D (= -3)t: +)
-
-» & 3) (=; (5: we)
-3. xs Vix:
-
-1) 0; 1] 2) [e3) 3 (5] 4) (s +)
-4.x +3{<4:
-
-D (: -)O(L +2) 2) (7:1)
-
-(1) 4) (4. 7)
+{
+    "requirement": "",
+    "data": {
+        "1": {
+            "question": "$ \\frac{4}{7}-2x > \\frac{3x}{2}$",
+            "chooses": "$1)\\ (\\frac{8}{49}; +\\infty) \\hfill 2)\\  (-\\infty; -\\frac{8}{7}) \\hfill  3)\\ (-\\frac{8}{7}; +\\infty) \\hfill  4)\\ (-\\infty; \\frac{8}{49}) \\hfill$"
+        },
+        "2": {
+            "question": "$2x^2-x < 3$",
+            "chooses": "$1)\\ (-\\frac{3}{2}; 1) \\hfill 2)\\ (-\\infty; -\\frac{3}{2})\\cup(1; +\\infty) \\hfill  3)\\ (-1; \\frac{3}{2}) \\hfill  4)\\ (-\\infty; -1)\\cup(\\frac{3}{2}; +\\infty) \\hfill$"
+        },
+        "3": {
+            "question": "$ \\sqrt[3]{x} > \\sqrt[3]{1-x}$",
+            "chooses": "$1)\\ [0; 1] \\hfill 2)\\ [0; \\frac{1}{2}) \\hfill  3)\\ (\\frac{1}{2}; 1] \\hfill  4)\\ (\\frac{1}{2}; +\\infty) \\hfill$"
+        },
+        "4": {
+            "question": "$|x+3| < 4$",
+            "chooses": "$1)\\ (-\\infty;-7)\\cup (1;+\\infty) \\hfill 2)\\ (-7;1) \\hfill  3)\\ (-\\infty;1) \\hfill  4)\\ (-1;7) \\hfill$"
+        }
+    }
+}

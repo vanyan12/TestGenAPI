@@ -3,7 +3,7 @@ import random
 import Data
 from TestClass import Test
 from fastapi import FastAPI, Depends, HTTPException, Request, Query
-from pydantic import BaseModel
+from pydantic import BaseModel, EmailStr
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
 from starlette.responses import FileResponse, StreamingResponse, JSONResponse
@@ -15,9 +15,14 @@ from google.cloud import storage
 import json
 from datetime import datetime, timedelta
 import requests
+import smtplib
+from email.message import EmailMessage
 
 os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = "../key.json"
 SHEET_URL = "https://api.sheetbest.com/sheets/40f2a1fb-714c-465a-90b1-480adc717178"
+
+EMAIL_ADDRESS = "mytest.gen@gmail.com"
+EMAIL_PASSWORD = "styy buvu ccyi rxfm"
 
 app = FastAPI()
 pdf = None
@@ -63,6 +68,10 @@ class PersonalData(BaseModel):
 class LoginData(BaseModel):
     email: str
     password: str
+
+class Feedback(BaseModel):
+    email: str
+    message: str
 
 @app.post("/submit-form")
 async def submit_form(request: Request):
@@ -364,4 +373,23 @@ async def can_generate(user: dict = Depends(f.get_user_id_from_request)):
         cursor.close()
         connection.close()
 
+@app.post("/send-feedback")
+async def feedback(feedback: Feedback):
+    msg = EmailMessage()
+    msg["Subject"] = "User feedback"
+    msg["From"] = EMAIL_ADDRESS
+    msg["To"] = EMAIL_ADDRESS
 
+    msg.set_content(f"""
+        User Email: {feedback.email}
+        Feedback: {feedback.message}
+    """)
+
+    try:
+        with smtplib.SMTP_SSL("smtp.gmail.com", 465) as smtp:
+            smtp.login(EMAIL_ADDRESS, EMAIL_PASSWORD)
+            smtp.send_message(msg)
+        return {'status':"success"}
+    except Exception as e:
+        print("Email error", e)
+        return {"status":"error"}

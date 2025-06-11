@@ -1,12 +1,21 @@
-L. 5-(4+7x)< 6- (1+ 5x):
-
-VD (;-28] 2) (ceo; -28)3) [-2,8; +0) 4) (coo; +00)
-2. ax -9 23:
-
-D[225,+%) 2) Bite) 3) [45; +) 4) [0; +50)
-3. (0,25) <16:
-
-VE +) DCs -2] 3 ca -2) 4) (2, 2]
-4. log ,(x—5)=2:
-
-1) (oo; 14] 2) 5: 14] 3) (5; 14] 4) (5; +o)
+{
+    "requirement": "",
+    "data": {
+        "1": {
+            "question": "$5 \\cdot (4 +7x) < 6 \\cdot (1+5x)$",
+            "chooses": "$1)\\ (-\\infty; -2,8] \\hfill 2)\\ (-\\infty; -2,8) \\hfill  3)\\ [-2,8; +\\infty) \\hfill  4)\\ (-\\infty;+\\infty \\hfill)$"
+        },
+        "2": {
+            "question": "$ \\sqrt{4x-9} \\ge 3$",
+            "chooses": "$1)\\ [2,25; +\\infty) \\hfill 2)\\ [3; +\\infty) \\hfill  3)\\ [4,5; +\\infty) \\hfill  4)\\ [0; +\\infty) \\hfill$"
+        },
+        "3": {
+            "question": "$(0,25)^x \\le 16$",
+            "chooses": "$1)\\ [-2; +\\infty) \\hfill 2)\\ (-\\infty; -2] \\hfill  3)\\ (-\\infty; -2) \\hfill  4)\\ (-\\infty; 2] \\hfill$"
+        },
+        "4": {
+            "question": "$\\log_3 (x-5) \\le 2$",
+            "chooses": "$1)\\ (-\\infty; 14] \\hfill 2)\\ [5;14] \\hfill  3)\\ (5;14] \\hfill  4)\\ (5; +\\infty) \\hfill$"
+        }
+    }
+}

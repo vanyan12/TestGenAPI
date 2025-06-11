@@ -1,34 +1,21 @@
-L. 5(x+2)=2(x+5):
-vo
-2 2y? -7y +3
-2y-1
-
-vz
-
-D2
-4. 2sin® = =cosx:
-2
-1) C4 anne Z
-3
-
-3) 2xn, ne Z
-
-20 3)-6
-2) z ն3 33
-
-3 7
-D5 »5
-
-D+ an ne Z
-
-9) +E +22mn eZ
-
-7
-
-1
-4) u4,
-WE
-
-2
-y=
-5
+{
+    "requirement": "",
+    "data": {
+        "1": {
+            "question": "$5(x+2)=2(x+5)$",
+            "chooses": "$1)\\ \\varnothing \\hfill 2)\\ 0 \\hfill  3)\\ -6 \\hfill  4)\\ 7 \\hfill$"
+        },
+        "2": {
+            "question": "$ \\frac{2y^2-7y+3}{2y-1}=0$",
+            "chooses": "$1)\\ \\frac{1}{2} \\hfill 2)\\ \\frac{1}{2}, 3 \\hfill  3)\\ 3 \\hfill  4)\\ \\frac{1}{2}, 4 \\hfill$"
+        },
+        "3": {
+            "question": "$( \\frac{2}{5})^{4x+5} = (\\frac{5}{2})^{2-7x}$",
+            "chooses": "$1)\\ 2 \\hfill 2)\\ \\frac{3}{7} \\hfill  3)\\ \\frac{7}{3} \\hfill  4)\\ \\frac{2}{3} \\hfill$"
+        },
+        "4": {
+            "question": "$2\\sin^2 \\frac{x}{2} = \\cos x:$",
+            "chooses": "$1)\\ \\frac{\\pi}{3}+ \\pi n, n \\in Z \\hfill 2)\\ \\pm \\frac{\\pi}{6}+ \\pi n, n \\in Z \\hfill  3)\\ 2\\pi n, n \\in Z \\hfill  4)\\ \\pm \\frac{\\pi}{3}+ 2\\pi n, n \\in Z \\hfill$"
+        }
+    }
+}

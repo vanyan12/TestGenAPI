@@ -1,14 +1,21 @@
-1. 2x-3<2(x+1):
-
-yo D9 9-5) © (Se)
-2.{x—2{ <3:
-
-D (+) 2D (55) DB [33I]  M[-LS]
-3. 2x3 <2:
-
-x-1
-
-D (+0)  D[k +e)  D(k +e) (1)
-4. 10®* <10 x:
-
-DS) D(6 DES] dros)
+{
+    "requirement": "",
+    "data": {
+        "1": {
+            "question": "$2x-3 < 2(x+1)$",
+            "chooses": "$1)\\ \\varnothing \\hfill 2)\\ (-\\infty;+\\infty) \\hfill  3)\\ (-\\infty; -\\frac{5}{4}) \\hfill  4)\\ (\\frac{5}{4}; +\\infty) \\hfill$"
+        },
+        "2": {
+            "question": "$|x-2| \\le 3$",
+            "chooses": "$1)\\ (-\\infty; +\\infty) \\hfill 2)\\ (-5; 5) \\hfill  3)\\ [-3;3] \\hfill  4)\\ [-1; 5] \\hfill$"
+        },
+        "3": {
+            "question": "$ \\frac{2x-3}{x-1} \\le 2$",
+            "chooses": "$1)\\ (-\\infty; +\\infty) \\hfill 2)\\ [1; +\\infty) \\hfill  3)\\ (1; +\\infty) \\hfill  4)\\  (-\\infty; 1)\\hfill$"
+        },
+        "4": {
+            "question": "$10^{lgx} \\le 10-x$",
+            "chooses": "$1)\\ (-\\infty;5) \\hfill 2)\\ (0;5) \\hfill  3)\\ (0;5] \\hfill  4)\\ [0;5) \\hfill$"
+        }
+    }
+}

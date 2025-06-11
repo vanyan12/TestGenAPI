@@ -1,14 +1,14 @@
 
 Database = {
-    'Section1': 2,#37
-    'Section7': 2,#20,
-    'Section3': 3,#63,
-    'Section4': 3,#49,
-    'Section10': 2,#26,
+    'Section1': 8,#37
+    'Section7': 8,#20,
+    'Section3': 7,#63,
+    'Section4': 8,#49,
+    'Section10': 7,#26,
     'Section6': 3,#23,
     'Section5': 3,#45, #66 task but there is not answers
     'Section2': 4,#73,
-    'Section8': 2,#68,
+    'Section8': 4,#68,
     'Section9': 2,#23,
     '2Section8': 10, #86,
     '2Section1': 18,#43
