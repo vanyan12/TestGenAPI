@@ -1,12 +1,21 @@
-2
-1. 5424305
-
-1) Sa+4 2) 20 4) a
-ւ ւ
-2) 2a 3) 3a 4) 3a
-3. log, b* log, (bc)+log, c:
-1 4log, b Dlg, b 3) log, (bE) #) log, ¢
-
-4. Liga (sin® a 1):
-
-1) cosa 2) sin @ 3)e0s°@ 4) sing
+{
+    "requirement": "",
+    "data": {
+        "1": {
+            "question": "$ \\frac{a^2-4}{2-a} + 2+3a$",
+            "chooses": "$1)\\ 5a+4 \\hfill 2)\\ 2a \\hfill  3)\\ \\frac{-3a^2}{2-a} \\hfill  4)\\ -a \\hfill$"
+        },
+        "2": {
+            "question": "$ \\frac{(a^4)^{\\frac{1}{3}}}{a} - 3a^{ \\frac{1}{3}}$",
+            "chooses": "$1)\\ 2a^{\\frac{1}{3}} \\hfill 2)\\ -2a^{\\frac{1}{3}} \\hfill  3)\\ -3a \\hfill  4)\\ -3a^{\\frac{1}{3}} \\hfill$"
+        },
+        "3": {
+            "question": "$\\log_a b^5 - log_a (bc) + log_a c$",
+            "chooses": "$1)\\ 4\\log_a b \\hfill 2)\\ \\log_a b \\hfill  3)\\ \\log_a (b^4c^2) \\hfill  4)\\ \\log_a c \\hfill$"
+        },
+        "4": {
+            "question": "$1+tg^2 \\alpha (\\sin^2 \\alpha -1)$",
+            "chooses": "$1)\\ \\cos \\alpha \\hfill 2)\\ \\sin^2 \\alpha \\hfill  3)\\ \\cos^2 \\alpha \\hfill  4)\\ \\sin \\alpha \\hfill$"
+        }
+    }
+}

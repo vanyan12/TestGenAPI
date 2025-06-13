@@ -8,6 +8,7 @@ from db import connect_to_db
 from collections import defaultdict
 from TestClass import Test
 from Data import Database as Data
+from pylatex import NoEscape, Figure
 
 
 pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
@@ -217,5 +218,4 @@ def add_section_to_pdf_and_log_errors(section_name):
             log.write("\n")
 
 
-add_section_to_pdf_and_log_errors("Section8")
-
+add_section_to_pdf_and_log_errors("3Section4")

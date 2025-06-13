@@ -3,7 +3,7 @@ import os
 
 from Data import Requirements, options
 from Answers import Answers
-from pylatex import Document, Command, Section, MiniPage
+from pylatex import Document, Command, Section, MiniPage, Package
 from pylatex.utils import NoEscape
 
 
@@ -35,6 +35,11 @@ class Test(Document):
         self.packages.append(NoEscape(r'\usepackage{amsmath}'))
         self.preamble.append(NoEscape(r'\usepackage{polyglossia}'))
         self.packages.append(NoEscape(r'\usepackage{titlesec}'))
+
+        self.packages.append(Package("tikz"))
+        self.packages.append(Package("mathrsfs"))
+        self.packages.append(Package("pgfplots"))
+
 
         self.preamble.append(NoEscape(r'\setmainfont{GHEAMariam}'))
 

@@ -5,11 +5,11 @@ Database = {
     'Section3': 7,#63,
     'Section4': 8,#49,
     'Section10': 7,#26,
-    'Section6': 3,#23,
-    'Section5': 3,#45, #66 task but there is not answers
-    'Section2': 4,#73,
-    'Section8': 4,#68,
-    'Section9': 2,#23,
+    'Section6': 7,#23,
+    'Section5': 7,#45, #66 task but there is not answers
+    'Section2': 7,#73,
+    'Section8': 7,#68,
+    'Section9': 7,#23,
     '2Section8': 10, #86,
     '2Section1': 18,#43
     '2Section3': 10,#19
@@ -18,9 +18,9 @@ Database = {
     '2Section7': 10, #29,
     '2Section4': 10,#23,
     '2Section5': 10,#35,
-    '3Section1': 1,#46,
-    '3Section4': 1,#16,
-    '3Section2': 1,#77
+    '3Section1': 7,#46,
+    '3Section4': 7,#16,
+    '3Section2': 7,#77
 }
 
 
@@ -45,7 +45,7 @@ Faculties = {
 Requirements = {
     'Section1': "Կատարել առաջադրանքները",
     'Section2': "Գտնել արտահայտության արժեքը",
-    'Section3': "",
+    'Section3': "Լուծել հավասարումը",
     'Section4': "Լուծել անհավասարումը",
     'Section5': "",
     'Section6': "Կատարել առաջադրանքները",
@@ -63,7 +63,7 @@ Requirements = {
     '2Section8': "Կատարել առաջադրանքները",
     '3Section1': "",
     '3Section2': "",
-    '3Section3': ""
+    '3Section4': "ճի՞շտ են, թե՞ սխալ հետեյալ պնդումները."
 }
 
 # For helper function in TestClass.py

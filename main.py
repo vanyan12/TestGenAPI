@@ -20,6 +20,7 @@ from email.message import EmailMessage
 
 os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = "../key.json"
 SHEET_URL = "https://api.sheetbest.com/sheets/40f2a1fb-714c-465a-90b1-480adc717178"
+FEEDBACK_URL = "https://api.sheetbest.com/sheets/3619f6fa-0f8f-4af9-83ce-948cc58601ab"
 
 EMAIL_ADDRESS = "mytest.gen@gmail.com"
 EMAIL_PASSWORD = "styy buvu ccyi rxfm"
@@ -236,7 +237,11 @@ async def root(
         cursor = connection.cursor()
 
         cursor.execute("INSERT INTO test_scores (user_id, test_url, test_answer) VALUES (?, ?, ?)",(user["id"], destination_blob_name, json.dumps(pdf.answers)))
-        cursor.execute("INSERT INTO TestGeneration (user_id, last_generated) VALUES (?, ?)", (user["id"], datetime.now()))
+        cursor.execute("UPDATE TestGeneration SET last_generated = ? WHERE user_id = ?", (datetime.now(), user["id"]))
+
+        if cursor.rowcount == 0:
+            cursor.execute("INSERT INTO TestGeneration (user_id, last_generated) VALUES (?, ?)", (user["id"], datetime.now()))
+
         connection.commit()
     except Exception as e:
         print(f"Error: {e}")
@@ -244,7 +249,6 @@ async def root(
         cursor.close()
         connection.close()
 
-    print("Pdf answers template", pdf.answers_input_template)
 
 
     return {
@@ -298,7 +302,7 @@ async def check(answer_sheet: AnswerSheet):
     return {"score": score}
 
 @app.get("/testsList")
-async def get_user_tests(user_id: int, page: int = 0, page_size: int = 10):
+async def get_user_tests(user_id: int):
     # Connect to the database
     connection = connect_to_db()
     cursor = connection.cursor()
@@ -375,21 +379,22 @@ async def can_generate(user: dict = Depends(f.get_user_id_from_request)):
 
 @app.post("/send-feedback")
 async def feedback(feedback: Feedback):
-    msg = EmailMessage()
-    msg["Subject"] = "User feedback"
-    msg["From"] = EMAIL_ADDRESS
-    msg["To"] = EMAIL_ADDRESS
-
-    msg.set_content(f"""
-        User Email: {feedback.email}
-        Feedback: {feedback.message}
-    """)
+    data = {
+        "Email": feedback.email,
+        "Feedback": feedback.message
+    }
 
     try:
-        with smtplib.SMTP_SSL("smtp.gmail.com", 465) as smtp:
-            smtp.login(EMAIL_ADDRESS, EMAIL_PASSWORD)
-            smtp.send_message(msg)
-        return {'status':"success"}
+        response = requests.post(FEEDBACK_URL, json=data)
+
+        if response.status_code == 200:
+            return JSONResponse(
+                content={"status": "success"},
+                status_code=200
+            )
     except Exception as e:
         print("Email error", e)
-        return {"status":"error"}
+        return JSONResponse(
+            content={"status":"error"},
+            status_code=500
+        )
