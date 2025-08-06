@@ -15,8 +15,8 @@ from google.cloud import storage
 import json
 from datetime import datetime, timedelta
 import requests
-import smtplib
-from email.message import EmailMessage
+import pytz
+from datetime import timezone
 
 os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = "../key.json"
 SHEET_URL = "https://api.sheetbest.com/sheets/40f2a1fb-714c-465a-90b1-480adc717178"
@@ -357,10 +357,13 @@ async def can_generate(user: dict = Depends(f.get_user_id_from_request)):
     cursor = connection.cursor()
 
     try:
-        cursor.execute("SELECT last_generated FROM TestGeneration WHERE user_id = ?", (user["id"],))
-        last_gen = cursor.fetchone()[0]
+        cursor.execute("SELECT last_generated AT TIME ZONE 'UTC' AT TIME ZONE 'Russian Standard Time' FROM TestGeneration WHERE user_id = ?", (user["id"],))
+        result = cursor.fetchone()[0]
 
-        now = datetime.now()
+        utc_time = result.replace(tzinfo=timezone.utc)
+        last_gen = utc_time.astimezone(pytz.timezone("Asia/Yerevan"))
+
+        now = datetime.now(pytz.timezone("Asia/Yerevan"))
         interval = timedelta(days=1)
 
         if now - last_gen >= interval:
