@@ -46,7 +46,7 @@ pillow==10.3.0
 playwright==1.51.0
 pluggy==1.4.0
 proto-plus==1.26.1
-protobuf==6.31.0
+protobuf==6.31.1
 py==1.11.0
 pyaes==1.6.1
 pyasn1==0.6.1
