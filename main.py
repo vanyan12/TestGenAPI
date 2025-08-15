@@ -5,7 +5,6 @@ from TestClass import Test
 from fastapi import FastAPI, Depends, HTTPException, Request, Query
 from pydantic import BaseModel, EmailStr
 from fastapi.middleware.cors import CORSMiddleware
-from fastapi.staticfiles import StaticFiles
 from starlette.responses import FileResponse, StreamingResponse, JSONResponse
 import uuid, os, io, tempfile
 from db import connect_to_db
@@ -17,13 +16,18 @@ from datetime import datetime, timedelta
 import requests
 import pytz
 from datetime import timezone
+from dotenv import load_dotenv
 
-os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = "../key.json"
-SHEET_URL = "https://api.sheetbest.com/sheets/40f2a1fb-714c-465a-90b1-480adc717178"
-FEEDBACK_URL = "https://api.sheetbest.com/sheets/3619f6fa-0f8f-4af9-83ce-948cc58601ab"
+load_dotenv()
+
+SHEET_URL= os.getenv("SHEET_URL")
+FEEDBACK_URL = os.getenv("FEEDBACK_URL")
+GOOGLE_KEY_PATH=os.getenv("GOOGLE_APPLICATION_CREDENTIALS")
+EMAIL_PASSWORD = os.getenv("EMAIL_PASSWORD")
+
+os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = GOOGLE_KEY_PATH
 
 EMAIL_ADDRESS = "mytest.gen@gmail.com"
-EMAIL_PASSWORD = "styy buvu ccyi rxfm"
 
 app = FastAPI()
 pdf = None
