@@ -12,15 +12,14 @@ TestGenAPI is a robust backend service built with FastAPI for automated generati
 - **Feedback Handling:** Supports user feedback submission, routed to administrators.
 - **Rate Limiting:** Users can generate new tests at controlled intervals.
 - **RESTful API Design:** Modern API endpoints for integration with frontend applications or other services.
-- **CORS Enabled:** Configured for cross-origin requests to support web frontend integrations.
 
 ## Main Endpoints
 
 - `POST /signup` – Register a new user
 - `POST /login` – Authenticate user and provide access token
 - `GET /auth-check` – Verify authentication status
-- `GET /pdf` – Generate and download a test as PDF
-- `GET /get-test/{file_name}` – Download a specific test PDF
+- `GET /pdf` – Generate a test as PDF
+- `GET /get-test/{file_name}` – Stream a specific test PDF
 - `POST /check` – Submit answers for automated grading
 - `GET /testsList` – Get a user's test history
 - `GET /can-generate` – Check if new test generation is allowed
@@ -31,10 +30,9 @@ TestGenAPI is a robust backend service built with FastAPI for automated generati
 - **Python 3**
 - **FastAPI**
 - **Google Cloud Storage**
-- **SQLite (or other SQL DB)**
-- **JWT Authentication (jose, passlib)**
-- **pydantic** for data validation
-- **CORS Middleware** for API accessibility
+- **SQL Server**
+- **JWT Authentication**
+- **Docker**
 
 ## Usage
 
@@ -56,8 +54,6 @@ TestGenAPI is a robust backend service built with FastAPI for automated generati
    uvicorn main:app --reload
    ```
 
-5. **Integrate with frontend or API client**  
-   - Endpoints can be accessed from a web app (e.g., React, Vue) or tools like Postman.
 
 ## Project Highlights
 
